@@ -9,29 +9,23 @@ import skopt.plots
 O problema do gread_search é que ele faz combinações exaltivas (todas) dos parâmetros que queremos colocar no modelo.
 Exemplo. Para tunar 7 parâmetros com 10 valores cada, temos que fazer 10**7 combinações, ou seja, teríamos que treinar
 10000000 de modelos
-
-
-Scikit-Optimize, or skopt, is a simple and efficient library to minimize (very) expensive and noisy black-box functions.
- It implements several methods for sequential model-based optimization. skopt aims to be accessible and easy to use in many contexts.
- 
- 
-No grad search damos a mesmo importância para todos os parãmetros, sendo que na verdade isso faz o nosso modelo gastar
-muito tempo.
-
-Na realidade, alguns parâmetros temos mais influencia do que outros.
-
-No Bayesian Optimization damos mais importância aos parâmetros que mais importam e explorar mais ao redor desses
+-----------------------------------------------------------------------------------------------------------------------
+Scikit-Optimize, ou skopt, é uma biblioteca simples e eficiente para minimizar funções de caixa preta (muito) caras e 
+barulhentas.
+Ele implementa vários métodos para otimização baseada em modelo sequencial. O Skopt pretende ser acessível e fácil de 
+usar em muitos contextos.
+-----------------------------------------------------------------------------------------------------------------------
+No GridSearch damos a mesma importância para todos os parãmetros, sendo que na verdade isso faz o nosso modelo gastar
+muito tempo. Na realidade, alguns parâmetros têm mais influencia que outros.
+-----------------------------------------------------------------------------------------------------------------------
+No Bayesian Optimization damos mais importância aos parâmetros que mais importam e exploramos mais ao redor desses
 parâmetros.
 
-
-Mais de 5 ou 7 parâmetros a Random forge funciona melhor, mas o procedimento é o mesmo.
-
-
+-----------------------------------------------------------------------------------------------------------------------
 # exploration exploitation tradeoff. Para saber mais.
 """
 
 df = pd.read_csv('winequality-red.csv', sep=';')
-# print(df['quality'].value_counts().sort_index())  # quantidade de notas
 df['vinho_bom'] = df['quality'].map(lambda x: 0 if x < 7 else 1)  # 0 se o valor da linha for menor do que 7
 
 
@@ -66,12 +60,5 @@ space = [
 
 
 BayesianOptimizer = gp_minimize(trainModel, space, random_state=1, verbose=1, n_calls=60, n_random_starts=10)
+# skopt.plots.plot_convergence(BayesianOptimizer)
 print(BayesianOptimizer.x)
-
-skopt.plots.plot_convergence(BayesianOptimizer)
-# Iteration No: 30 ended. Search finished for the next optimal point.
-# Time taken: 0.3925
-# Function value obtained: -0.8923
-# Current minimum: -0.9162
-# [0.0672858974212934, 60, 44, 0.9421713999524447, 0.8005503127028804]
-
