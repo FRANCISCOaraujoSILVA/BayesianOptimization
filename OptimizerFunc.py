@@ -1,5 +1,4 @@
 from skopt import gp_minimize
-from skopt.plots import plot_convergence
 
 
 # Função a ser minimizada
@@ -14,5 +13,3 @@ result = gp_minimize(objective_function, space, n_calls=20, random_state=10, ver
 print(' ')
 print(result.x)
 
-# Função plot_convergence para visualizar a convergência
-# plot_convergence(result)

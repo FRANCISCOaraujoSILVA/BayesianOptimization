@@ -62,3 +62,5 @@ space = [
 BayesianOptimizer = gp_minimize(trainModel, space, random_state=1, verbose=1, n_calls=60, n_random_starts=10)
 # skopt.plots.plot_convergence(BayesianOptimizer)
 print(BayesianOptimizer.x)
+
+
